@@ -1,0 +1,392 @@
+[
+  {
+    "edad": "edad",
+    "pais": "pais",
+    "trabaja": false
+  },
+  {
+    "edad": "18",
+    "pais": "Argentina",
+    "trabaja": false
+  },
+  {
+    "edad": "19",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "20",
+    "pais": "Argentina",
+    "trabaja": false
+  },
+  {
+    "edad": "21",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "23",
+    "pais": "Argentina",
+    "trabaja": false
+  },
+  {
+    "edad": "24",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "25",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Argentina",
+    "trabaja": false
+  },
+  {
+    "edad": "27",
+    "pais": "Argentina",
+    "trabaja": true
+  },
+  {
+    "edad": "18",
+    "pais": "Chile",
+    "trabaja": false
+  },
+  {
+    "edad": "19",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "20",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Chile",
+    "trabaja": false
+  },
+  {
+    "edad": "22",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "23",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "24",
+    "pais": "Chile",
+    "trabaja": false
+  },
+  {
+    "edad": "25",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Chile",
+    "trabaja": true
+  },
+  {
+    "edad": "27",
+    "pais": "Chile",
+    "trabaja": false
+  },
+  {
+    "edad": "18",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "19",
+    "pais": "Uruguay",
+    "trabaja": false
+  },
+  {
+    "edad": "20",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Uruguay",
+    "trabaja": false
+  },
+  {
+    "edad": "23",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "24",
+    "pais": "Uruguay",
+    "trabaja": false
+  },
+  {
+    "edad": "25",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Uruguay",
+    "trabaja": true
+  },
+  {
+    "edad": "27",
+    "pais": "Uruguay",
+    "trabaja": false
+  },
+  {
+    "edad": "18",
+    "pais": "Brasil",
+    "trabaja": false
+  },
+  {
+    "edad": "19",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "20",
+    "pais": "Brasil",
+    "trabaja": false
+  },
+  {
+    "edad": "21",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "23",
+    "pais": "Brasil",
+    "trabaja": false
+  },
+  {
+    "edad": "24",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "25",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Brasil",
+    "trabaja": false
+  },
+  {
+    "edad": "27",
+    "pais": "Brasil",
+    "trabaja": true
+  },
+  {
+    "edad": "18",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "19",
+    "pais": "Peru",
+    "trabaja": false
+  },
+  {
+    "edad": "20",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Peru",
+    "trabaja": false
+  },
+  {
+    "edad": "23",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "24",
+    "pais": "Peru",
+    "trabaja": false
+  },
+  {
+    "edad": "25",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Peru",
+    "trabaja": true
+  },
+  {
+    "edad": "27",
+    "pais": "Peru",
+    "trabaja": false
+  },
+  {
+    "edad": "18",
+    "pais": "Mexico",
+    "trabaja": false
+  },
+  {
+    "edad": "19",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "20",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Mexico",
+    "trabaja": false
+  },
+  {
+    "edad": "22",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "23",
+    "pais": "Mexico",
+    "trabaja": false
+  },
+  {
+    "edad": "24",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "25",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Mexico",
+    "trabaja": false
+  },
+  {
+    "edad": "27",
+    "pais": "Mexico",
+    "trabaja": true
+  },
+  {
+    "edad": "18",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "19",
+    "pais": "Espa\u00f1a",
+    "trabaja": false
+  },
+  {
+    "edad": "20",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Espa\u00f1a",
+    "trabaja": false
+  },
+  {
+    "edad": "23",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "24",
+    "pais": "Espa\u00f1a",
+    "trabaja": false
+  },
+  {
+    "edad": "25",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "26",
+    "pais": "Espa\u00f1a",
+    "trabaja": true
+  },
+  {
+    "edad": "27",
+    "pais": "Espa\u00f1a",
+    "trabaja": false
+  },
+  {
+    "edad": "18",
+    "pais": "Colombia",
+    "trabaja": true
+  },
+  {
+    "edad": "19",
+    "pais": "Colombia",
+    "trabaja": false
+  },
+  {
+    "edad": "20",
+    "pais": "Colombia",
+    "trabaja": true
+  },
+  {
+    "edad": "21",
+    "pais": "Colombia",
+    "trabaja": true
+  },
+  {
+    "edad": "22",
+    "pais": "Colombia",
+    "trabaja": false
+  },
+  {
+    "edad": "23",
+    "pais": "Colombia",
+    "trabaja": true
+  },
+  {
+    "edad": "24",
+    "pais": "Colombia",
+    "trabaja": false
+  }
+]

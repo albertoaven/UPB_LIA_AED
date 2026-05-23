@@ -1,0 +1,85 @@
+import json
+
+personas = [
+    {"edad": 18, "pais": "Argentina", "trabaja": False},
+    {"edad": 19, "pais": "Argentina", "trabaja": True},
+    {"edad": 20, "pais": "Argentina", "trabaja": False},
+    {"edad": 21, "pais": "Argentina", "trabaja": True},
+    {"edad": 22, "pais": "Argentina", "trabaja": True},
+    {"edad": 23, "pais": "Argentina", "trabaja": False},
+    {"edad": 24, "pais": "Argentina", "trabaja": True},
+    {"edad": 25, "pais": "Argentina", "trabaja": True},
+    {"edad": 26, "pais": "Argentina", "trabaja": False},
+    {"edad": 27, "pais": "Argentina", "trabaja": True},
+
+    {"edad": 18, "pais": "Chile", "trabaja": False},
+    {"edad": 19, "pais": "Chile", "trabaja": True},
+    {"edad": 20, "pais": "Chile", "trabaja": True},
+    {"edad": 21, "pais": "Chile", "trabaja": False},
+    {"edad": 22, "pais": "Chile", "trabaja": True},
+    {"edad": 23, "pais": "Chile", "trabaja": True},
+    {"edad": 24, "pais": "Chile", "trabaja": False},
+    {"edad": 25, "pais": "Chile", "trabaja": True},
+    {"edad": 26, "pais": "Chile", "trabaja": True},
+    {"edad": 27, "pais": "Chile", "trabaja": False},
+
+    {"edad": 18, "pais": "Uruguay", "trabaja": True},
+    {"edad": 19, "pais": "Uruguay", "trabaja": False},
+    {"edad": 20, "pais": "Uruguay", "trabaja": True},
+    {"edad": 21, "pais": "Uruguay", "trabaja": True},
+    {"edad": 22, "pais": "Uruguay", "trabaja": False},
+    {"edad": 23, "pais": "Uruguay", "trabaja": True},
+    {"edad": 24, "pais": "Uruguay", "trabaja": False},
+    {"edad": 25, "pais": "Uruguay", "trabaja": True},
+    {"edad": 26, "pais": "Uruguay", "trabaja": True},
+    {"edad": 27, "pais": "Uruguay", "trabaja": False},
+
+    {"edad": 18, "pais": "Brasil", "trabaja": False},
+    {"edad": 19, "pais": "Brasil", "trabaja": True},
+    {"edad": 20, "pais": "Brasil", "trabaja": False},
+    {"edad": 21, "pais": "Brasil", "trabaja": True},
+    {"edad": 22, "pais": "Brasil", "trabaja": True},
+    {"edad": 23, "pais": "Brasil", "trabaja": False},
+    {"edad": 24, "pais": "Brasil", "trabaja": True},
+    {"edad": 25, "pais": "Brasil", "trabaja": True},
+    {"edad": 26, "pais": "Brasil", "trabaja": False},
+    {"edad": 27, "pais": "Brasil", "trabaja": True},
+
+    {"edad": 18, "pais": "Perú", "trabaja": True},
+    {"edad": 19, "pais": "Perú", "trabaja": False},
+    {"edad": 20, "pais": "Perú", "trabaja": True},
+    {"edad": 21, "pais": "Perú", "trabaja": True},
+    {"edad": 22, "pais": "Perú", "trabaja": False},
+    {"edad": 23, "pais": "Perú", "trabaja": True},
+    {"edad": 24, "pais": "Perú", "trabaja": False},
+    {"edad": 25, "pais": "Perú", "trabaja": True},
+    {"edad": 26, "pais": "Perú", "trabaja": True},
+    {"edad": 27, "pais": "Perú", "trabaja": False},
+
+    {"edad": 18, "pais": "México", "trabaja": False},
+    {"edad": 19, "pais": "México", "trabaja": True},
+    {"edad": 20, "pais": "México", "trabaja": True},
+    {"edad": 21, "pais": "México", "trabaja": False},
+    {"edad": 22, "pais": "México", "trabaja": True},
+    {"edad": 23, "pais": "México", "trabaja": False},
+    {"edad": 24, "pais": "México", "trabaja": True},
+    {"edad": 25, "pais": "México", "trabaja": True},
+    {"edad": 26, "pais": "México", "trabaja": False},
+    {"edad": 27, "pais": "México", "trabaja": True},
+
+    {"edad": 18, "pais": "España", "trabaja": True},
+    {"edad": 19, "pais": "España", "trabaja": False},
+    {"edad": 20, "pais": "España", "trabaja": True},
+    {"edad": 21, "pais": "España", "trabaja": True},
+    {"edad": 22, "pais": "España", "trabaja": False},
+    {"edad": 23, "pais": "España", "trabaja": True},
+    {"edad": 24, "pais": "España", "trabaja": False},
+    {"edad": 25, "pais": "España", "trabaja": True},
+    {"edad": 26, "pais": "España", "trabaja": True},
+    {"edad": 27, "pais": "España", "trabaja": False}
+]
+
+with open("datosempleo.json", "w", encoding="utf-8") as archivo:
+    json.dump(personas, archivo, indent=4)
+
+print("Archivo JSON generado correctamente.")

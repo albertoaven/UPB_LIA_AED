@@ -1,0 +1,23 @@
+# Configuración sensible
+config.py
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entorno virtual
+venv/
+.env/
+.venv/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
