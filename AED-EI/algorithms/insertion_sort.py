@@ -1,4 +1,15 @@
 def insertion_sort(arr, asc):
+  """Ordena una lista in-place usando insertion sort.
+
+  Puede trabajar con enteros o con objetos que tengan el atributo `age`.
+
+  Args:
+    arr: Lista de elementos a ordenar.
+    asc: `True` para orden ascendente, `False` para descendente.
+
+  Returns:
+    list: La misma lista recibida, ya ordenada.
+  """
   if isinstance(arr[0], int):
     for i in range(1, len(arr)):
       key = arr[i]

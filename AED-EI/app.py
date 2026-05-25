@@ -1,3 +1,4 @@
+# --------------- Importación de los módulos a usar en el sistema ---------------
 import timeit
 from collections import deque
 from db.connection import conectar
@@ -9,19 +10,15 @@ from algorithms.bs import bs
 from algorithms.quick_sort import quick_sort
 from algorithms.insertion_sort import insertion_sort
 from services.indexing import build_index_by_id
+# --------------- Fin Importación de los módulos a usar en el sistema ------------
 
 def show_pending_event_list(conn):
   """Muestra en consola todos los eventos almacenados en la base de datos.
   Args:
     conn: Conexión activa a la base de datos.
   """
-  # Buscamos los eventos pendientes
   events = get_not_resolved_events(conn)
-
-  # Definir los encabezados de la tabla
   headers = ["ID", "Timestamp", "Category", "Priority", "Origin", "Destination", "Description"]
-
-  # Convertir eventos a filas
   rows = []
 
   for e in events:
@@ -36,21 +33,7 @@ def show_pending_event_list(conn):
       e.age
     ])
 
-  # Calcular ancho máximo de cada columna según la cantidad 
-  # máxima de caracteres de los valores
-  col_widths = []
-
-  for col in zip(headers, *rows):
-    col_widths.append(max(len(str(value)) for value in col))
-
-  # Imprimir encabezado
-  print(format_row(headers, col_widths))
-  print("-" * (sum(col_widths) + 3 * (len(headers) - 1)))
-
-  # Imprimir filas
-  for row in rows:
-    print(format_row(row, col_widths))
-
+  print_results(headers, rows)
   print(f"Se encontraron {len(events)} eventos pendientes de resolver.")
   print("")
 
@@ -64,15 +47,16 @@ def create_event(conn):
 
   cities = get_cities(conn)
 
-  # Solicitar los datos al usuario
   date = input("Fecha y hora del evento en formato 'YYYY-MM-DD HH:mm': ")
   category = input("Ingrese la categoría del evento: ")
   priority = int(input("Ingrese la prioridad del evento: "))
   description = input("Ingrese la descripción del evento: ")
+
+  #Primero muestro un listado para que el usuario vea el ID de la ciudad
   origin = pick_city(cities, "Ingrese la ciudad cuidad del origen: ")
+  #Primero muestro un listado para que el usuario vea el ID de la ciudad
   destination = pick_city(cities, "Ingrese la ciudad cuidad de destino: ")
 
-  # Armar el objeto
   new_event = Event(
     id = None,
     timestamp = date,
@@ -89,16 +73,13 @@ def create_event(conn):
 
   if result > 0:
     print(f"Evento creado exitosamente (Id = {result})")
-
-    # Añadimos el Id al objeto para añadirlo a la cola
-    new_event.id = result
   else:
     print("Hubo un error al crear el evento.")
 
   print("")
 
 def show_incidents_by_priority(conn):
-  """Muestra los eventos ordenados por prioridad usando una cola.
+  """Muestra los eventos ordenados por prioridad usa sorted().
   Args:
     conn: Conexión activa a la base de datos.
   """
@@ -108,7 +89,6 @@ def show_incidents_by_priority(conn):
   print("La cola con la prioridad por 'Prioridad' es:")
   print("")
 
-  # Definir los encabezados de la tabla
   headers = ["ID", "Timestamp", "Category", "Priority", "Origin", "Destination", "Description"]
   rows = []
 
@@ -138,6 +118,12 @@ def show_incidents_by_priority(conn):
   print("")
 
 def process_incidents_by_priority(conn):
+  """Obtiene y ordena eventos pendientes por prioridad ascendente.
+  Args:
+    conn: Conexión activa a la base de datos.
+  Returns:
+    list[Event]: Eventos pendientes ordenados por prioridad.
+  """
   events = deque(get_not_resolved_events(conn))
   event_sorted = sorted(events, key=lambda e: e.priority)
 
@@ -154,7 +140,6 @@ def show_incidents_by_priority_quicksort(conn):
   print("La cola con la prioridad por 'Prioridad' es:")
   print("")
 
-  # Definir los encabezados de la tabla
   headers = ["ID", "Timestamp", "Category", "Priority", "Origin", "Destination", "Description"]
   rows = []
 
@@ -182,6 +167,12 @@ def show_incidents_by_priority_quicksort(conn):
   print("")
 
 def process_incidents_by_priority_quicksort(conn):
+  """Obtiene y ordena eventos pendientes por prioridad usando quick sort.
+  Args:
+    conn: Conexión activa a la base de datos.
+  Returns:
+    list[Event]: Eventos pendientes ordenados por prioridad.
+  """
   events = deque(get_not_resolved_events(conn))
   event_sorted = quick_sort(events, True)
 
@@ -228,13 +219,19 @@ def show_incidents_by_age(conn):
   print("")
 
 def process_incidents_by_age(conn):
+  """Obtiene y ordena eventos pendientes por antiguedad descendente. Usa sorted()
+  Args:
+    conn: Conexión activa a la base de datos.
+  Returns:
+    list[Event]: Eventos pendientes ordenados del mas antiguo al mas reciente.
+  """
   events = get_not_resolved_events(conn)
   events_sorted = sorted(events, key=lambda e: e.age, reverse=True)
 
   return events_sorted
 
 def show_incidents_by_age_insertionsort(conn):
-  """Muestra los eventos ordenados por edad usando una cola de prioridad.
+  """Muestra los eventos ordenados por edad usando una cola de prioridad. Usa el algoritmo insertion sort
   Args:
     conn: Conexión activa a la base de datos.
   """
@@ -270,12 +267,22 @@ def show_incidents_by_age_insertionsort(conn):
   print("")
 
 def process_incidents_by_age_insertionsort(conn):
+  """Obtiene y ordena eventos pendientes por antiguedad usando insertion sort.
+  Args:
+    conn: Conexión activa a la base de datos.
+  Returns:
+    list[Event]: Eventos pendientes ordenados por antiguedad.
+  """
   events = get_not_resolved_events(conn)
   events_sorted = insertion_sort(events, False)
 
   return events_sorted
 
 def resolve_next_priority_incident(conn):
+  """Resuelve el siguiente incidente segun prioridad y antiguedad.
+  Args:
+    conn: Conexión activa a la base de datos.
+  """
   heap = PriorityHeap()
 
   events = get_not_resolved_events(conn)
@@ -296,6 +303,10 @@ def resolve_next_priority_incident(conn):
   set_incident_status(conn, event.id, "resolved")
 
 def resolve_older_incident(conn):
+  """Resuelve el incidente pendiente mas antiguo.
+  Args:
+    conn: Conexión activa a la base de datos.
+  """
   heap = PriorityHeap()
 
   events = get_not_resolved_events(conn)
@@ -316,6 +327,11 @@ def resolve_older_incident(conn):
   set_incident_status(conn, event.id, "resolved")
 
 def find_incident_by_id_sequential(conn, id):
+  """Busca un incidente por ID con busqueda secuencial y muestra el resultado.
+  Args:
+    conn: Conexión activa a la base de datos.
+    id: Identificador del incidente a buscar.
+  """
   events = get_events(conn)
   comparisons = 0
   foundevent = None
@@ -354,6 +370,11 @@ def find_incident_by_id_sequential(conn, id):
     print_results(headers, rows)
 
 def find_incident_by_id_binary(conn, id):
+  """Busca un incidente por ID con busqueda binaria y muestra el resultado.
+  Args:
+    conn: Conexión activa a la base de datos.
+    id: Identificador del incidente a buscar.
+  """
   events = get_events(conn)
 
   events.sort(key=lambda e: e.id)
@@ -388,6 +409,11 @@ def find_incident_by_id_binary(conn, id):
     print_results(headers, rows)
 
 def find_incident_by_id_indexes(conn, id):
+  """Busca un incidente por ID usando un indice en memoria y muestra el resultado.
+  Args:
+    conn: Conexión activa a la base de datos.
+    id: Identificador del incidente a buscar.
+  """
   events = get_events(conn)
 
   index = build_index_by_id(events)

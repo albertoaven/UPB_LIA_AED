@@ -1,4 +1,15 @@
 def quick_sort(arr, asc):
+  """Ordena una lista usando quick sort y devuelve una nueva lista.
+
+  Soporta listas de enteros o de objetos con atributo `priority`.
+
+  Args:
+    arr: Lista de elementos a ordenar.
+    asc: `True` para orden ascendente, `False` para descendente.
+
+  Returns:
+    list: Nueva lista ordenada segun el criterio indicado.
+  """
   if len(arr) <= 1:
     return arr
   
