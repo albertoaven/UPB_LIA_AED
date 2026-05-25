@@ -11,6 +11,11 @@ class PriorityHeap:
 
     self.counter += 1
 
+  def insert(self, element, priority, subpriority):
+    heapq.heappush(self.heap, (priority, subpriority, element))
+
+    self.counter += 1
+
   # Quitar un elemento
   def pickmax(self):
     if(self.heap):
@@ -31,3 +36,6 @@ class PriorityHeap:
   
   def emptyheap(self):
     return len(self.heap) == 0
+  
+  def heaplength(self):
+    return len(self.heap)

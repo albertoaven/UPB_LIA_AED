@@ -1,7 +1,9 @@
 from models.city import City
 from models.route import Route
 from models.event import Event
-from db.queries import retrieve_cities, retrieve_events, retrieve_event, retrieve_routes, db_insert_event
+from db.queries import retrieve_cities, retrieve_events, retrieve_event, retrieve_routes, db_insert_event, update_incident_status,retrieve_not_resolved_events
+
+VALID_STATUSES = {'pending', 'in_progress', 'resolved'}
 
 def get_cities(conn):
   with conn.cursor() as cursor:
@@ -22,6 +24,14 @@ def get_routes(conn):
 def get_events(conn):
   with conn.cursor() as cursor:
     rows = retrieve_events(cursor)
+
+  events = [Event(*r) for r in rows]
+
+  return events
+
+def get_not_resolved_events(conn):
+  with conn.cursor() as cursor:
+    rows = retrieve_not_resolved_events(cursor)
 
   events = [Event(*r) for r in rows]
 
@@ -53,3 +63,12 @@ def insert_event(conn, event):
     return db_insert_event(cursor, data)
   
   conn.commit()
+
+def set_incident_status(conn, incident_id, status):
+    if status not in VALID_STATUSES:
+        raise ValueError("Estado inválido")
+
+    with conn.cursor() as cursor:
+        update_incident_status(cursor, incident_id, status)
+
+    conn.commit()
