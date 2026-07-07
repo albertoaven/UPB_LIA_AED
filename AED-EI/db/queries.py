@@ -141,9 +141,30 @@ def retrieve_routes(cursor):
         list[tuple]: Filas con ciudad origen, ciudad destino, distancia y tiempo.
     """
     cursor.execute("""
-        SELECT c1.name, c2.name, r.distance, r.time
+        SELECT c1.id, c1.name, c2.name, r.distance, r.time
         FROM routes r
         JOIN cities c1 ON r.origin_id = c1.id
         JOIN cities c2 ON r.destination_id = c2.id
     """)
     return cursor.fetchall()
+
+def db_insert_route(cursor, data):
+
+  query = """
+    INSERT INTO routes
+    (
+      origin_id,
+      destination_id,
+      distance,
+      time
+    )
+    VALUES (%s,%s,%s,%s)
+    RETURNING id
+  """
+
+  cursor.execute(
+    query,
+    data
+  )
+
+  return cursor.fetchone()[0]
