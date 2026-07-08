@@ -26,6 +26,7 @@ from algorithms.prim import prim
 from algorithms.knapsack import knapsack
 from algorithms.brute_force import brute_force_search
 from algorithms.kmp import kmp_search
+from algorithms.linear_programming import solve_resource_assignment
 
 from models.event import Event
 from models.graph import create_graph, draw_graph
@@ -814,6 +815,46 @@ def optimize_resources(datasource):
 
   print()
 
+def optimize_brigades():
+  x, y, z = solve_resource_assignment()
+
+  print()
+  print("Programación líneal")
+  print()
+  print("Variables de decisión")
+  print()
+  print("x = cantidad de brigadas rápidas")
+  print("y = cantidad de brigadas especializadas")
+  print()
+  print("Función objetivo")
+  print()
+  print("Brigada rápida: beneficio = 10 puntos")
+  print("Brigada especializada: beneficio = 15 puntos")
+  print("Entonces se debe maximizar: Z = 10x + 15y")
+  print()
+  print("Restricciones")
+  print()
+  print("  Personal disponible")
+  print("    Cada brigada rápida consume 2 agentes")
+  print("    Cada brigada especializada consume 4 agentes")
+  print("    Disponibles en total: 20 agentes")
+  print("    Entonces: 2x + 4y ≤ 20")
+  print()
+  print("  Vehículos disponibles")
+  print("    Cada brigada rápida utiliza 1 vehículo.")
+  print("    Cada brigada especializada utiliza 2 vehículos.")
+  print("    Disponibles en total 10 vehículos")
+  print("    Entonces: x + 2y ≤ 10")
+  print()
+  print("  No negatividad")
+  print("    x ≥ 0 e y ≥ 0")
+  print()
+  print("Resultado óptimo")
+  print(f"  Brigadas rápidas: {x}")
+  print(f"  Brigadas especializadas: {y}")
+  print(f"  Beneficio máximo: {z}")
+  print()
+
 def main():
   """Ejecuta el menú principal del sistema de gestión de incidentes."""
 
@@ -866,6 +907,7 @@ def main():
     print("18 - Crear ruta")
     print("19 - Buscar texto en incidentes (Fuerza bruta vs KMP)")
     print("20 - Optimización (Knapsack)")
+    print("21 - Optimización (Linear programming)")
     print("XX - Salir del sistema.")
     print("")
 
@@ -971,6 +1013,9 @@ def main():
 
     elif option == "20":
       optimize_resources(datasource)
+
+    elif option == "21":
+      optimize_brigades()
 
     elif option.upper() == "XX":
       break
