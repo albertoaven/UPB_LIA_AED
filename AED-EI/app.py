@@ -26,7 +26,10 @@ from models.event import Event
 from models.graph import create_graph, draw_graph
 from models.route import Route
 
+import time
 
+from algorithms.brute_force import brute_force_search
+from algorithms.kmp import kmp_search
 
 
 # --------------- Fin Importación de los módulos a usar en el sistema ------------
@@ -701,6 +704,87 @@ def create_route(datasource):
 
   print()
 
+def compare_text_search(datasource):
+  """
+  Compara Fuerza Bruta y KMP
+  sobre las descripciones de incidentes.
+  """
+
+  pattern = input(
+    "Texto a buscar: "
+  )
+
+  events = datasource.get_events()
+
+  text = " ".join(
+    event.description
+    for event in events
+  )
+
+  # ------------------
+  # Fuerza Bruta
+  # ------------------
+
+  start = time.perf_counter()
+
+  brute_result = (
+    brute_force_search(
+      text.lower(),
+      pattern.lower()
+    )
+  )
+
+  brute_time = (
+    time.perf_counter()
+    - start
+  )
+
+  # ------------------
+  # KMP
+  # ------------------
+
+  start = time.perf_counter()
+
+  kmp_result = (
+    kmp_search(
+      text.lower(),
+      pattern.lower()
+    )
+  )
+
+  kmp_time = (
+    time.perf_counter()
+    - start
+  )
+
+  print()
+
+  print("FUERZA BRUTA")
+  print(
+    f"Coincidencias: "
+    f"{len(brute_result)}"
+  )
+  print(
+    f"Tiempo: "
+    f"{brute_time:.8f}s"
+  )
+
+  print()
+
+  print("KMP")
+
+  print(
+    f"Coincidencias: "
+    f"{len(kmp_result)}"
+  )
+
+  print(
+    f"Tiempo: "
+    f"{kmp_time:.8f}s"
+  )
+
+  print()
+
 def main():
   """Ejecuta el menú principal del sistema de gestión de incidentes."""
 
@@ -751,6 +835,7 @@ def main():
     print("16 - Buscar camino más corto con Dijkstra")
     print("17 - Buscar caminos más cortos con Prim")
     print("18 - Crear ruta")
+    print("19 - Buscar texto en incidentes (Fuerza bruta vs KMP)")
     print("XX - Salir del sistema.")
     print("")
 
@@ -850,6 +935,9 @@ def main():
 
     elif option == "18":
       create_route(datasource)
+
+    elif option == "19":
+      compare_text_search(datasource)
 
     elif option.upper() == "XX":
       break
