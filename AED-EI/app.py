@@ -27,6 +27,7 @@ from algorithms.knapsack import knapsack
 from algorithms.brute_force import brute_force_search
 from algorithms.kmp import kmp_search
 from algorithms.linear_programming import solve_resource_assignment
+from algorithms.rsa import generate_keys, encrypt, decrypt
 
 from models.event import Event
 from models.graph import create_graph, draw_graph
@@ -786,7 +787,7 @@ def compare_text_search(datasource):
   print()
 
 def optimize_resources(datasource):
-  capacity = int(input("Presupuesto disponible: "))
+  capacity = int(input("Días de antigüedad: "))
 
   events = datasource.get_events()
 
@@ -855,6 +856,31 @@ def optimize_brigades():
   print(f"  Beneficio máximo: {z}")
   print()
 
+def demo_rsa():
+  print()
+  print("Demostración RSA")
+  print()
+
+  message = input("Mensaje a cifrar: ")
+
+  public_key, private_key = generate_keys()
+
+  cipher = encrypt(message, public_key)
+
+  decrypted = decrypt(cipher, private_key)
+
+  print()
+  print(f"Clave pública: {public_key}")
+  print(f"Clave privada: {private_key}")
+  print()
+
+  print(f"Cifrado: {cipher}")
+  print()
+
+  print(f"Descifrado: {decrypted}")
+
+  print()
+
 def main():
   """Ejecuta el menú principal del sistema de gestión de incidentes."""
 
@@ -908,6 +934,7 @@ def main():
     print("19 - Buscar texto en incidentes (Fuerza bruta vs KMP)")
     print("20 - Optimización (Knapsack)")
     print("21 - Optimización (Linear programming)")
+    print("22 - Demostración RSA")
     print("XX - Salir del sistema.")
     print("")
 
@@ -969,11 +996,7 @@ def main():
     elif option == "14":
       event_id = int(input("Ingrese el ID del incidente: "))
 
-      incident = find_incident_by_id_avl(
-        datasource,
-        event_id,
-        False
-      )
+      incident = find_incident_by_id_avl(datasource, event_id, False)
 
       if incident is not None:
         find_path_bfs(datasource, incident.origin, incident.destination)
@@ -1016,6 +1039,9 @@ def main():
 
     elif option == "21":
       optimize_brigades()
+
+    elif option == "22":
+      demo_rsa()
 
     elif option.upper() == "XX":
       break

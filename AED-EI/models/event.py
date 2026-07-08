@@ -14,4 +14,7 @@ class Event:
   
   def calculate_age(self):
     now = datetime.now()
-    return now - self.timestamp
+
+    result = now - self.timestamp
+
+    return result.days
