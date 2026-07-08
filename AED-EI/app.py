@@ -1,5 +1,7 @@
 # --------------- Importación de los módulos a usar en el sistema ---------------
+import time
 import timeit
+
 from collections import deque
 from datetime import datetime
 
@@ -21,16 +23,13 @@ from algorithms.bfs import bfs, find_bfs
 from algorithms.dfs import recursive_dfs, find_dfs
 from algorithms.dijkstra import dijkstra, find_path_dijkstra
 from algorithms.prim import prim
+from algorithms.knapsack import knapsack
+from algorithms.brute_force import brute_force_search
+from algorithms.kmp import kmp_search
 
 from models.event import Event
 from models.graph import create_graph, draw_graph
 from models.route import Route
-
-import time
-
-from algorithms.brute_force import brute_force_search
-from algorithms.kmp import kmp_search
-
 
 # --------------- Fin Importación de los módulos a usar en el sistema ------------
 
@@ -785,6 +784,36 @@ def compare_text_search(datasource):
 
   print()
 
+def optimize_resources(datasource):
+  capacity = int(input("Presupuesto disponible: "))
+
+  events = datasource.get_events()
+
+  items = []
+
+  for event in events:
+    cost = event.calculate_age()
+    value = event.priority * cost
+
+    items.append(
+      (event, cost, value)
+    )
+
+  total_value, selected = knapsack(items,capacity)
+
+  print()
+
+  print(f"Beneficio total: " f"{total_value}")
+
+  print()
+
+  print("Incidentes seleccionados:")
+
+  for event, cost, value in selected:
+    print(f"ID={event.id}")
+
+  print()
+
 def main():
   """Ejecuta el menú principal del sistema de gestión de incidentes."""
 
@@ -836,6 +865,7 @@ def main():
     print("17 - Buscar caminos más cortos con Prim")
     print("18 - Crear ruta")
     print("19 - Buscar texto en incidentes (Fuerza bruta vs KMP)")
+    print("20 - Optimización (Knapsack)")
     print("XX - Salir del sistema.")
     print("")
 
@@ -938,6 +968,9 @@ def main():
 
     elif option == "19":
       compare_text_search(datasource)
+
+    elif option == "20":
+      optimize_resources(datasource)
 
     elif option.upper() == "XX":
       break
