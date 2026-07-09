@@ -3,6 +3,7 @@
 # Complejidad espacial: O(V + E)
 
 import heapq
+import time
 
 def prim(graph, start):
   """
@@ -18,6 +19,9 @@ def prim(graph, start):
   Returns:
     list: Lista de aristas seleccionadas.
   """
+  start_time = time.perf_counter()
+  evaluated_edges = 0
+  selected_edges = 0
 
   visited = set()
 
@@ -30,6 +34,8 @@ def prim(graph, start):
   # Cargamos las aristas del nodo inicial
 
   for neighbor, data in graph[start].items():
+    evaluated_edges += 1
+
     heapq.heappush(
       priority_queue,
       (
@@ -58,10 +64,13 @@ def prim(graph, start):
       )
     )
 
+    selected_edges += 1
+
     # Agregar nuevas aristas candidatas
 
     for neighbor, data in \
       graph.get(destination, {}).items():
+      evaluated_edges += 1
 
       if neighbor not in visited:
         heapq.heappush(
@@ -73,4 +82,6 @@ def prim(graph, start):
           )
         )
 
-  return mst
+  execution_time = time.perf_counter() - start_time
+
+  return mst, evaluated_edges, selected_edges, execution_time

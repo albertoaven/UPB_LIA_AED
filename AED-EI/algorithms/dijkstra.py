@@ -3,6 +3,7 @@
 # Complejidad espacial: O(V)
 
 import heapq
+import time
 
 def dijkstra(graph, start):
     distances = {n: float('inf') for n in graph}
@@ -50,6 +51,9 @@ def find_path_dijkstra(graph,  start,  destination):
         []
       )
   """
+  start_time = time.perf_counter()
+  node_expansions = 0
+  edge_relaxations = 0
 
   distances = {
     node: float("inf")
@@ -65,6 +69,8 @@ def find_path_dijkstra(graph,  start,  destination):
   ]
 
   while priority_queue:
+    node_expansions += 1
+
     current_distance, current = \
       heapq.heappop(
         priority_queue
@@ -75,6 +81,8 @@ def find_path_dijkstra(graph,  start,  destination):
 
     for neighbor, data in \
       graph.get(current, {}).items():
+
+      edge_relaxations += 1
 
       new_distance = (
         current_distance
@@ -109,9 +117,14 @@ def find_path_dijkstra(graph,  start,  destination):
     destination != start
     and destination not in previous
   ):
+    execution_time = time.perf_counter() - start_time
+
     return (
       float("inf"),
-      []
+      [],
+      node_expansions,
+      edge_relaxations,
+      execution_time
     )
 
   # Reconstrucción del camino
@@ -130,7 +143,12 @@ def find_path_dijkstra(graph,  start,  destination):
 
   path.reverse()
 
+  execution_time = time.perf_counter() - start_time
+
   return (
     distances[destination],
-    path
+    path,
+    node_expansions,
+    edge_relaxations,
+    execution_time
   )

@@ -2,6 +2,8 @@
 # Complejidad temporal: O(V + E)
 # Complejidad espacial: O(V)
 
+import time
+
 def recursive_dfs(graph, start):
   visited = set()
   order = []
@@ -71,6 +73,8 @@ def find_dfs(graph, start, destination):
   Returns:
     list: Camino encontrado o lista vacía.
   """
+  start_time = time.perf_counter()
+  operations = 0
 
   visited = set()
   stack = [start]
@@ -79,6 +83,8 @@ def find_dfs(graph, start, destination):
   }
 
   while stack:
+    operations += 1
+
     current = stack.pop()
 
     if current in visited:
@@ -91,6 +97,8 @@ def find_dfs(graph, start, destination):
       break
 
     for neighbor in graph.get(current, {}):
+      operations += 1
+
       if neighbor not in visited:
         parent[neighbor] = current
 
@@ -98,7 +106,9 @@ def find_dfs(graph, start, destination):
 
   # No existe camino
   if destination not in parent:
-    return []
+    execution_time = (time.perf_counter() - start_time)
+
+    return [], operations, execution_time
 
   # Reconstrucción del camino
   path = []
@@ -106,10 +116,14 @@ def find_dfs(graph, start, destination):
   current = destination
 
   while current is not None:
+    operations += 1
+
     path.append(current)
 
     current = parent[current]
 
   path.reverse()
 
-  return path
+  execution_time = (time.perf_counter() - start_time)
+
+  return path, operations, execution_time

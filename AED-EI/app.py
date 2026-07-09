@@ -503,15 +503,19 @@ def find_incident_by_id_avl(datasource, event_id, show_tree):
   events = datasource.get_events()
 
   # Construye el árbol AVL
-  tree = build_event_avl(events)
+  tree, build_time = build_event_avl(events)
 
   if show_tree:
     print("\nÁrbol AVL generado:\n")
 
     tree.print_tree()
 
+    print("Tiempo de contrucción: ", round(build_time, 5), "s")
+    print("Operaciones de inserción: ", tree.insert_operations)
+    print("Rotaciones: ", tree.rotations)
+
   # Busca el evento
-  event = tree.search(event_id)
+  event, search_time, operations = tree.search(event_id)
 
   print()
 
@@ -526,6 +530,8 @@ def find_incident_by_id_avl(datasource, event_id, show_tree):
     print(f"Descripción: {event.description}")
     print(f"Origen: {event.origin}")
     print(f"Destino: {event.destination}")
+    print("Tiempo de búsqueda: ", round(search_time, 5), "s")
+    print("Operaciones: ", operations)
 
   print()
 
@@ -556,11 +562,13 @@ def find_path_bfs(datasource, source, destination):
 
   draw_graph(graph)
 
-  result = find_bfs(graph, source, destination)
+  result, operations, execution_time = find_bfs(graph, source, destination)
 
   print()
 
   print("Recorrido BFS: ", result)
+  print("Operaciones: ", operations)
+  print("Tiempo de ejecución: ", round(execution_time, 5), "s")
 
   print()
 
@@ -571,11 +579,13 @@ def find_path_dfs(datasource, source, destination):
 
   draw_graph(graph)
 
-  result = find_dfs(graph, source, destination)
+  result, operations, execution_time = find_dfs(graph, source, destination)
 
   print()
 
   print("Recorrido DFS: ", result)
+  print("Operaciones: ", operations)
+  print("Tiempo: ", round(execution_time, 5), "s")
 
   print()
 
@@ -632,13 +642,16 @@ def shortest_route(datasource, source, destination):
 
   draw_graph(graph)
 
-  distance, path = find_path_dijkstra(graph, source, destination)
+  distance, path, node_expansions, edge_relaxations, execution_time = find_path_dijkstra(graph, source, destination)
 
   print()
   print(f"Menor camino entre ciudades: {source} - {destination}")
   print()
   print(f"Recorrido: {path}")
   print(f"Distancia total: {distance} KM")
+  print("Nodos expandidos: ", node_expansions)
+  print("Relajaciones: ", edge_relaxations)
+  print("Tiempo: ", round(execution_time, 5), "s")
   print()
 
 def minimum_spanning_tree(datasource):
@@ -650,7 +663,7 @@ def minimum_spanning_tree(datasource):
     "Ciudad inicial: "
   )
 
-  mst = prim(
+  mst, evaluated_edges, selected_edges, execution_time = prim(
     graph,
     city
   )
@@ -662,6 +675,10 @@ def minimum_spanning_tree(datasource):
   for edge in mst:
     print(edge)
 
+  print()
+  print("Aristas evaluadas: ", evaluated_edges)
+  print("Aristas seleccionadas: ", selected_edges)
+  print("Tiempo: ", round(execution_time, 5), "s")
   print()
 
 def create_route(datasource):

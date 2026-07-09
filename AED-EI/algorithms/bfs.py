@@ -2,10 +2,15 @@
 # Complejidad temporal: O(V + E)
 # Complejidad espacial: O(V)
 
+import time
+
 from collections import deque
 
 
 def bfs(graph, start):
+  start_time = time.perf_counter()
+  operations = 0
+
   visited = set()
   queue = deque([start])
   order = []
@@ -13,6 +18,8 @@ def bfs(graph, start):
   visited.add(start)
 
   while queue:
+    operations += 1
+
     current = queue.popleft()
 
     order.append(current)
@@ -23,7 +30,9 @@ def bfs(graph, start):
 
         queue.append(neighbor)
 
-  return order
+  execution_time = (time.perf_counter() - start_time)
+
+  return order, operations, execution_time
 
 def find_bfs(graph, start, destination):
   """
@@ -38,6 +47,8 @@ def find_bfs(graph, start, destination):
   Returns:
     list: Camino encontrado o lista vacía.
   """
+  start_time = time.perf_counter()
+  operations = 0
 
   visited = set()
 
@@ -51,6 +62,8 @@ def find_bfs(graph, start, destination):
   visited.add(start)
 
   while queue:
+    operations += 1
+
     current = queue.popleft()
 
     # Llegamos al destino
@@ -67,7 +80,9 @@ def find_bfs(graph, start, destination):
 
   # No existe camino
   if destination not in parent:
-    return []
+    execution_time = (time.perf_counter() - start_time)
+
+    return [], operations, execution_time
 
   # Reconstruir camino
   path = []
@@ -75,10 +90,14 @@ def find_bfs(graph, start, destination):
   current = destination
 
   while current is not None:
+    operations += 1
+
     path.append(current)
 
     current = parent[current]
 
   path.reverse()
 
-  return path
+  execution_time = (time.perf_counter() - start_time)
+
+  return path, operations, execution_time

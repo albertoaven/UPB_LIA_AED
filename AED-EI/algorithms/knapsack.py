@@ -1,3 +1,5 @@
+import time
+
 def knapsack(items, capacity):
   """
   Problema de la mochila 0/1.
@@ -18,6 +20,9 @@ def knapsack(items, capacity):
       eventos_seleccionados
     )
   """
+  start_time = time.perf_counter()
+  evaluated_cells = 0
+  decisions = 0
 
   n = len(items)
 

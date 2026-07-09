@@ -13,6 +13,8 @@ Características:
 - Rotación RL (Right Left)
 """
 
+import time
+
 class AVLNode:
   """
   Representa un nodo dentro del árbol AVL.
@@ -52,6 +54,10 @@ class AVLTree:
     # Raíz del árbol
     self.root = None
 
+    self.insert_operations = 0
+    self.search_operations = 0
+    self.rotations = 0
+
   def get_height(self, node):
     """
     Devuelve la altura de un nodo.
@@ -84,6 +90,8 @@ class AVLTree:
     Caso LL (Left Left).
     """
 
+    self.rotations += 1
+
     x = y.left
     t2 = x.right
 
@@ -115,6 +123,8 @@ class AVLTree:
     Caso RR (Right Right).
     """
 
+    self.rotations += 1
+
     y = x.right
     t2 = y.left
 
@@ -143,6 +153,8 @@ class AVLTree:
     """
     Inserta un evento en el árbol.
     """
+
+    self.insert_operations += 1
 
     self.root = self._insert(
       self.root,
@@ -293,10 +305,18 @@ class AVLTree:
       Event | None
     """
 
-    return self._search(
-      self.root,
-      key
-    )
+    start_time = time.perf_counter()
+
+    self.search_operations += 1
+
+    result = self._search(
+          self.root,
+          key
+        )
+    
+    search_time = time.perf_counter() - start_time
+
+    return result, search_time, self.search_operations
 
   def _search(self, node, key):
     """
@@ -332,10 +352,13 @@ def build_event_avl(events):
   """
   Construye un árbol AVL a partir de una lista de eventos.
   """
+  start_time = time.perf_counter()
 
   tree = AVLTree()
 
   for event in events:
     tree.insert(event)
 
-  return tree
+  build_time = time.perf_counter() - start_time
+
+  return tree, build_time
