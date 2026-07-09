@@ -12,8 +12,6 @@ def brute_force_search(text, pattern):
   Returns:
     list[int]: Posiciones donde aparece el patrón.
   """
-  start_time = time.perf_counter()
-  comparisons = 0
 
   # Lista donde guardaremos las posiciones encontradas
   positions = []
@@ -26,9 +24,7 @@ def brute_force_search(text, pattern):
 
   # Si el patrón está vacío no buscamos nada
   if m == 0:
-    execution_time = (time.perf_counter() - start_time)
-
-    return positions, comparisons, execution_time
+    return positions
 
   # Recorremos todas las posiciones posibles donde
   # el patrón podría comenzar dentro del texto
@@ -47,8 +43,6 @@ def brute_force_search(text, pattern):
     # Comparamos carácter por carácter
     # el patrón con el texto
     for j in range(m):
-      comparisons += 1
-
       # Comparamos el carácter j del patrón
       # con el carácter correspondiente del texto
       if text[i + j] != pattern[j]:
@@ -63,6 +57,4 @@ def brute_force_search(text, pattern):
     if match:
       positions.append(i)
 
-  execution_time = (time.perf_counter() - start_time)
-
-  return positions, comparisons, execution_time
+  return positions

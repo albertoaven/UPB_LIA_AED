@@ -530,6 +530,7 @@ def find_incident_by_id_avl(datasource, event_id, show_tree):
     print(f"Descripción: {event.description}")
     print(f"Origen: {event.origin}")
     print(f"Destino: {event.destination}")
+    print(f"Antigüedad: {event.calculate_age()} días")
     print("Tiempo de búsqueda: ", round(search_time, 5), "s")
     print("Operaciones: ", operations)
 
